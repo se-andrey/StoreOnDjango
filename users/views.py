@@ -29,7 +29,7 @@ class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
     template_name = 'users/registration.html'
     success_url = reverse_lazy('users:login')
     success_message = 'Вы успешно зарегистрированы'
-    title = 'Store - Личный кабинет'
+    title = 'Store - Регистрация'
 
 
 class UserProfileView(TitleMixin, UpdateView):
