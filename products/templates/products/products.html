@@ -57,7 +57,6 @@
                 </div>
 
                 <div class="row">
-
                     {% for product in object_list %}
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
@@ -83,7 +82,6 @@
                         </div>
                     {% endfor %}
 
-
                 </div>
 
                 {% if is_paginated %}
@@ -100,7 +98,7 @@
                             <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
                                 <a class="page-link"
                                    href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}"
-                                   tabindex="-1" aria-disabled="true">Слудующая</a>
+                                   tabindex="-1" aria-disabled="true">Следующая</a>
                             </li>
                         </ul>
                     </nav>
