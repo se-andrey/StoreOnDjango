@@ -18,6 +18,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
@@ -25,6 +26,7 @@
       <list>
         <option value="$MODULE_DIR$/products/templates" />
         <option value="$MODULE_DIR$/users/templates" />
+        <option value="$MODULE_DIR$/orders/templates" />
       </list>
     </option>
   </component>
