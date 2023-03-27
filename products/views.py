@@ -47,16 +47,7 @@ def basket_add(request, product_id):
     """
     Добавление товара в корзину
     """
-    product = Product.objects.get(id=product_id)
-    baskets = Basket.objects.filter(user=request.user, product=product)
-
-    if not baskets.exists():
-        Basket.objects.create(user=request.user, product=product, quantity=1)
-    else:
-        basket = Basket.objects.get(user=request.user, product=product)
-        basket.quantity += 1
-        basket.save()
-
+    Basket.create_or_update(product_id=product_id, user=request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

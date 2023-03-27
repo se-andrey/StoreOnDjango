@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import environ, os
-
 from pathlib import Path
+
+import environ
 
 env = environ.Env(
     DEBUG=bool,
@@ -36,7 +36,10 @@ env = environ.Env(
 
     STRIPE_PUBLIC_KEY=str,
     STRIPE_SECRET_KEY=str,
-    STRIPE_WEBHOOK_SECRET=str
+    STRIPE_WEBHOOK_SECRET=str,
+
+    GOOGLE_CLIENT_ID=str,
+    GOOGLE_SECRET=str
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,10 +81,13 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'debug_toolbar',
     'django_extensions',
+    'rest_framework',
+    'rest_framework.authtoken',
 
     'products',
     'orders',
     'users',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -234,8 +240,8 @@ SOCIALACCOUNT_PROVIDERS = {
     },
     'google': {
        'APP': {
-            'client_id': '123',
-            'secret': '456',
+            'client_id': env('GOOGLE_CLIENT_ID'),
+            'secret': env('GOOGLE_SECRET'),
             'key': ''
         }
     }
@@ -251,3 +257,13 @@ CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
+
+# Django REST framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
